@@ -7,6 +7,12 @@ description: Описание процессов, как задавать воп
 
 ## Javascript Basic
 
+<!--v-->
+
+[Репозиторий курса](https://github.com/JavaScript-Basic-OTUS/otus--jsbasic)
+
+<!--v-->
+
 ### Преподаватели
 
 [Страница о курсе](https://otus.ru/lessons/javascript-basic/?int_source=courses_catalog&int_term=programming)
@@ -30,7 +36,7 @@ description: Описание процессов, как задавать воп
 
 <!--v-->
 
-1. Slack (пишем в канал группы, пользуемся ветками в обсуждениях)
+1. TG
 2. [Github](https://github.com/vvscode/otus--javascript-basic)
 3. Чат с преподавателем в ЛК
 
