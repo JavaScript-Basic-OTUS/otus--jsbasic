@@ -170,7 +170,7 @@ _Это все разбирается в рамках первого модул�
 
 <!--v-->
 
-[FizzBuzz task](https://codesandbox.io/s/github/JavaScript-Basic-OTUS/otus--jsbasic/tree/fizzbuzz/lessons/lesson03/code/fizzbuzz)
+[FizzBuzz task](https://codesandbox.io/s/github/JavaScript-Basic-OTUS/otus--jsbasic/tree/master/lessons/lesson03/code/fizzbuzz)
 
 <!--v-->
 
