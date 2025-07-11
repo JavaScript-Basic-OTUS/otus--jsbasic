@@ -499,7 +499,7 @@ console.log(settings[b]); // ?
 
 <!-- v -->
 
-[Практика](https://codesandbox.io/s/github/vvscode/otus--javascript-basic/tree/master/lessons/lesson03/code/smart-getter)
+[Практика](https://codesandbox.io/s/github/JavaScript-Basic-OTUS/otus--jsbasic/tree/master/lessons/lesson06/code/smart-getter)
 
 Напишите функцию, которая позволит безопасно читать свойства из объекта на любой вложенности.
 
@@ -511,7 +511,7 @@ console.log(settings[b]); // ?
 
 <!-- s -->
 
-### [Домашнее задание](https://github.com/vvscode/otus--javascript-basic/blob/master/lessons/lesson03/homework_lec1.md)
+### [Домашнее задание](https://github.com/JavaScript-Basic-OTUS/otus--jsbasic/blob/master/lessons/lesson06/task.md)
 
 <!-- v -->
 
