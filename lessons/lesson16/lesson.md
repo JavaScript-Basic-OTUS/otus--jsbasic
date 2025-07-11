@@ -1,10 +1,6 @@
-# Lesson 16
-
 ---
-
 title: Занятие 16
 description: Базовое использование API и JavaScript. Как работать с сетевыми ресурсами
-
 ---
 
 # OTUS
