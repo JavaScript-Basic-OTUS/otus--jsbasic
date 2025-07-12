@@ -27,10 +27,10 @@ cd otus--javascript-basic && npm install
 mkdir lessons/lessonXX
 
 # Создайте файл для нового занятия
-touch lessons/lessonXX/lecture.md
+touch lessons/lessonXX/lesson.md
 
 # Запустите reveal-md в режиме разработки
-npm run dev -- lessons/lessonXX/lecture.md
+npm run dev -- lessons/lessonXX/lesson.md
 ```
 
 При коммите должны сработать husky-хуки для проверки и форматирования измененных файлов. Дополнительная проверка настроена через github-actions.
