@@ -305,7 +305,7 @@ describe("isPalindrom", () => {
 
 <!-- v -->
 
-Внутри теста находится одно или несколько [ожиданий](https://jestjs.io/docs/ru/using-matchers)
+Внутри теста находится одно или несколько [ожиданий](https://jest-archive-august-2023.netlify.app/ru/docs/29.0/using-matchers/) (на последней версии jest см [сюда](https://jestjs.io/docs/using-matchers))
 
 ```js [1-30]
 describe("isPalindrom", () => {
@@ -317,7 +317,7 @@ describe("isPalindrom", () => {
 
 <!-- v -->
 
-Возможностей [писать ожидания](https://jestjs.io/docs/ru/expect) много, но свести все можно к проверке утверждения на истинность. Просто использование разных ожиданий может упростить жизнь.
+Возможностей [писать ожидания](https://jest-archive-august-2023.netlify.app/ru/docs/29.0/expect/) ([v30 doc](https://jestjs.io/docs/expect)) много, но свести все можно к проверке утверждения на истинность. Просто использование разных ожиданий может упростить жизнь.
 
 <!-- v -->
 
@@ -355,7 +355,7 @@ it("calls cb with result", () => {
 
 <!-- v -->
 
-Если в тестах есть повторяющиеся операции по подготовке окружения - их можно выносить в [специальные хуки](https://jestjs.io/docs/ru/setup-teardown)
+Если в тестах есть повторяющиеся операции по подготовке окружения - их можно выносить в [специальные хуки](https://jestjs.io/docs/setup-teardown)
 
 - `beforeAll`
 - `beforeEach`
@@ -462,7 +462,7 @@ TDD и цикл RGR
 
 - [`jest.fn()`](https://jestjs.io/docs/en/jest-object#jestfnimplementation) - для создания новых mock-функций
 - [`jest.spyOn()`](https://jestjs.io/docs/en/jest-object#jestspyonobject-methodname) - для оборачивания в mock-функции существующие методы
-- [`jest.mock`](https://jestjs.io/docs/ru/jest-object) - для мока модулей (файлов)
+- [`jest.mock`](https://jestjs.io/docs/jest-object) - для мока модулей (файлов)
 
 <!-- v -->
 
@@ -604,7 +604,7 @@ describe('createCalculatorUI', () => {
 <!-- v -->
 
 1. [YT: Разработка через тестирование в JS или как начать любить программирование](https://www.youtube.com/watch?v=xzKwp3nf5KE)
-2. [Jest - Начало работы (Весь блок `Introduction` в документации)](https://jestjs.io/docs/ru/getting-started)
+2. [Jest - Начало работы (Весь блок `Introduction` в документации)](https://jestjs.io/docs/getting-started)
 3. [Мои «Ого, я этого не знал!» моменты с Jest](https://habr.com/ru/company/otus/blog/457616/)
 4. [YT: Jest. Unit Тестирование в JavaScript](https://www.youtube.com/watch?v=IEDe8jl5efU)
 5. [JavaScript & Node.js testing best practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
