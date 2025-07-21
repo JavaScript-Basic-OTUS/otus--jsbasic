@@ -14,14 +14,14 @@
 Вам необходимо реализовать собственную версию метода .bind для функций в JavaScript. Встроенный `.bind` использовать нельзя
 
 ```js
-    function greet(greeting, punctuation) {
-    return greeting + ', ' + this.name + punctuation;
-    }
+function greet(greeting, punctuation) {
+  return greeting + ", " + this.name + punctuation;
+}
 
-    const person = { name: 'Алиса' };
-    const greetAlice = greet.myBind(person, 'Привет');
+const person = { name: "Алиса" };
+const greetAlice = greet.myBind(person, "Привет");
 
-    console.log(greetAlice('!')); // Ожидаемый результат: "Привет, Алиса!"
+console.log(greetAlice("!")); // Ожидаемый результат: "Привет, Алиса!"
 ```
 
 ### Цепочка
@@ -29,8 +29,8 @@
 Создать конструктор с методами, так, чтобы следующий код работал и делал соответствующие вещи те запуск кода ниже должен делать то, что говорят методы
 
 ```js
-    const u = new User();
-    u.askName().askAge().showAgeInConsole().showNameInAlert();
+const u = new User();
+u.askName().askAge().showAgeInConsole().showNameInAlert();
 ```
 
 ### ForceConstructor
@@ -42,15 +42,15 @@
 Написать каррирующую функцию `curry` ( преобразующую функцию - из функции многих аргументов, получить множество функций одного аргумента)
 
 ```js
-    function sum2(x, y) {
-    return x + y;
-    }
-    function sum4(a, b, c, d) {
-    return a + b + c + d;
-    }
+function sum2(x, y) {
+  return x + y;
+}
+function sum4(a, b, c, d) {
+  return a + b + c + d;
+}
 
-    curry(sum2)(1)(2); // 3
-    curry(sum4)(2)(3)(4)(5); // 14
+curry(sum2)(1)(2); // 3
+curry(sum4)(2)(3)(4)(5); // 14
 ```
 
 ## Критерии

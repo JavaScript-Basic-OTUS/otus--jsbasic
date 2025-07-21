@@ -1,59 +1,91 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Safe Getter</title>
+    <meta charset="UTF-8" />
+  </head>
 
-<head>
-  <title>Safe Getter</title>
-  <meta charset="UTF-8" />
-</head>
+  <body>
+    <div id="app"></div>
 
-<body>
-  <div id="app"></div>
+    <script src="src/index.js"></script>
 
-  <script src="src/index.js"></script>
+    <section>
+      <h2>Задача: Реализация аналога функции <code>_.get</code> из lodash</h2>
 
-  <section>
-    <h2>Задача: Реализация аналога функции <code>_.get</code> из lodash</h2>
+      <h3>Минимальный набор знаний</h3>
+      <ul>
+        <li>
+          <strong>Доступ к свойствам объекта (через точку и скобки):</strong> -
+          <code>obj.property</code> или <code>obj["property"]</code>.<br />
+          Квадратные скобки позволяют использовать переменную с именем свойства.
+          <small
+            >Подробнее:
+            <a
+              href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Working_with_objects"
+              target="_blank"
+              >MDN: Работа с объектами</a
+            ></small
+          >
+        </li>
+        <li>
+          <strong>Работа с вложенными объектами:</strong> - Для доступа к
+          свойствам внутри других объектов используйте последовательный доступ:
+          <code>obj.user.profile.name</code> или
+          <code>obj['user']['profile'].name</code> -
+          <small
+            >Подробнее:
+            <a href="https://learn.javascript.ru/object" target="_blank"
+              >learn.javascript.ru: Объекты</a
+            ></small
+          >
+        </li>
+        <li>
+          <strong>Работа со строками и массивами:</strong> - Используйте
+          <a
+            href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/split"
+            target="_blank"
+            ><code>split()</code></a
+          >
+          для разбивки строки пути на части:
+          <code>'user.profile.name'.split('.')</code>.
+        </li>
+        <li>
+          <strong>Проверка существования свойства:</strong>- Если обратиться к
+          несуществующему свойству, вернётся <code>undefined</code>. Можно
+          проверить через сравнение с <code>undefined</code> или оператор
+          <code>in</code>: <code>'key' in obj</code>.
+          <small
+            >Подробнее:
+            <a href="https://learn.javascript.ru/object" target="_blank"
+              >learn.javascript.ru: Объекты</a
+            ></small
+          >
+        </li>
+        <li>
+          <strong>Условные конструкции:</strong>- Используйте
+          <code>if</code> для проверки условий, например: если свойство не
+          найдено, вернуть значение по умолчанию.
+        </li>
+        <li>
+          <strong>Объявление функций с несколькими аргументами</strong>
+        </li>
+        <li>
+          <strong>Обработка пустого пути</strong> - как проверить что строка или
+          другое значение "пустое"
+        </li>
+      </ul>
 
-    <h3>Минимальный набор знаний</h3>
-    <ul>
-  <li>
-    <strong>Доступ к свойствам объекта (через точку и скобки):</strong> - <code>obj.property</code> или <code>obj["property"]</code>.<br>
-    Квадратные скобки позволяют использовать переменную с именем свойства. <small>Подробнее: <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Working_with_objects" target="_blank">MDN: Работа с объектами</a></small>
-  </li>
-  <li>
-    <strong>Работа с вложенными объектами:</strong> -
-    Для доступа к свойствам внутри других объектов используйте последовательный доступ: <code>obj.user.profile.name</code> или  <code>obj['user']['profile'].name</code> -
-    <small>Подробнее: <a href="https://learn.javascript.ru/object" target="_blank">learn.javascript.ru: Объекты</a></small>
-  </li>
-  <li>
-    <strong>Работа со строками и массивами:</strong> - 
-    Используйте <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/split" target="_blank"><code>split()</code></a> для разбивки строки пути на части: <code>'user.profile.name'.split('.')</code>.
-  </li>
-  <li>
-    <strong>Проверка существования свойства:</strong>- 
-    Если обратиться к несуществующему свойству, вернётся <code>undefined</code>. Можно проверить через сравнение с <code>undefined</code> или оператор <code>in</code>: <code>'key' in obj</code>. 
-    <small>Подробнее: <a href="https://learn.javascript.ru/object" target="_blank">learn.javascript.ru: Объекты</a></small>
-  </li>
-  <li>
-    <strong>Условные конструкции:</strong>- 
-    Используйте <code>if</code> для проверки условий, например: если свойство не найдено, вернуть значение по умолчанию.
-  </li>
-  <li>
-    <strong>Объявление функций с несколькими аргументами</strong>
-  </li>
-  <li>
-    <strong>Обработка пустого пути</strong> - как проверить что строка или другое значение "пустое"
-  </li>
-</ul>
-
-
-
-    <h3>Что нужно сделать</h3>
-    <p>
-      Реализуйте функцию <code>get</code>, которая позволяет безопасно получать значения из вложенных объектов по
-      строковому пути. Эта функция должна работать аналогично методу <a href="https://webdevkin.ru/posts/frontend/lodash-get" target="_blank"><code>_.get</code> из библиотеки lodash</a>.
-    </p>
-    <pre><code>
+      <h3>Что нужно сделать</h3>
+      <p>
+        Реализуйте функцию <code>get</code>, которая позволяет безопасно
+        получать значения из вложенных объектов по строковому пути. Эта функция
+        должна работать аналогично методу
+        <a href="https://webdevkin.ru/posts/frontend/lodash-get" target="_blank"
+          ><code>_.get</code> из библиотеки lodash</a
+        >.
+      </p>
+      <pre><code>
       /**
       * get: Smart getter for object props
       *
@@ -64,65 +96,101 @@
       * @param {any} fallbackValue
       */
     </code></pre>
-<table>
-  <thead>
-    <tr>
-      <th>Описание в JSDoc</th>
-      <th>Пояснение простыми словами</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>get: Smart getter for object props</code></td>
-      <td>Это функция, которая "умно" достает значения свойств из объекта.</td>
-    </tr>
-    <tr>
-      <td><code>Check tests for usage examples</code></td>
-      <td>Посмотри тесты, чтобы увидеть примеры использования этой функции.</td>
-    </tr>
-    <tr>
-      <td><code>@param {any} obj</code></td>
-      <td>Первый аргумент — объект, из которого нужно получить значение.</td>
-    </tr>
-    <tr>
-      <td><code>@param {string} property</code></td>
-      <td>Второй аргумент — строка с путем к нужному свойству, например: <code>'user.profile.name'</code>.</td>
-    </tr>
-    <tr>
-      <td><code>@param {any} fallbackValue</code></td>
-      <td>Третий аргумент — значение по умолчанию, которое возвращается, если свойство не найдено.</td>
-    </tr>
-  </tbody>
-</table>
+      <table>
+        <thead>
+          <tr>
+            <th>Описание в JSDoc</th>
+            <th>Пояснение простыми словами</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>get: Smart getter for object props</code></td>
+            <td>
+              Это функция, которая "умно" достает значения свойств из объекта.
+            </td>
+          </tr>
+          <tr>
+            <td><code>Check tests for usage examples</code></td>
+            <td>
+              Посмотри тесты, чтобы увидеть примеры использования этой функции.
+            </td>
+          </tr>
+          <tr>
+            <td><code>@param {any} obj</code></td>
+            <td>
+              Первый аргумент — объект, из которого нужно получить значение.
+            </td>
+          </tr>
+          <tr>
+            <td><code>@param {string} property</code></td>
+            <td>
+              Второй аргумент — строка с путем к нужному свойству, например:
+              <code>'user.profile.name'</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>@param {any} fallbackValue</code></td>
+            <td>
+              Третий аргумент — значение по умолчанию, которое возвращается,
+              если свойство не найдено.
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
+      <h3>Описание задачи</h3>
+      <ul>
+        <li>
+          Функция принимает объект, строку с путем до свойства (через точку или
+          скобки, например, <code>'user.profile.name'</code> или
+          <code>'user["profile"].name'</code>) и значение по умолчанию.
+        </li>
+        <li>
+          Возвращает значение, найденное по этому пути, либо значение по
+          умолчанию, если путь не существует или где-то на пути встречается
+          <code>undefined</code> или <code>null</code>.
+        </li>
+        <li>Если путь пустой, функция должна вернуть сам объект.</li>
+      </ul>
 
-    <h3>Описание задачи</h3>
-    <ul>
-      <li>Функция принимает объект, строку с путем до свойства (через точку или скобки, например,
-        <code>'user.profile.name'</code> или <code>'user["profile"].name'</code>) и значение по умолчанию.</li>
-      <li>Возвращает значение, найденное по этому пути, либо значение по умолчанию, если путь не существует или где-то
-        на пути встречается <code>undefined</code> или <code>null</code>.</li>
-      <li>Если путь пустой, функция должна вернуть сам объект.</li>
-    </ul>
+      <h3>
+        Когда
+        <a
+          href="https://medium.com/nuances-of-programming/%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-lodash-%D0%BF%D0%BE-%D0%BF%D1%80%D0%B5%D0%B6%D0%BD%D0%B5%D0%BC%D1%83-%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%B5%D0%BD-5c6906df9617"
+          >бывает полезна</a
+        >
+      </h3>
+      <ul>
+        <li>
+          Когда структура объекта заранее неизвестна или может быть глубоко
+          вложенной.
+        </li>
+        <li>
+          Когда нужно избежать ошибок при попытке доступа к несуществующим
+          свойствам (например,
+          <code>Cannot read property 'x' of undefined'</code>).
+        </li>
+        <li>
+          Для обработки данных из API, где некоторые поля могут отсутствовать.
+        </li>
+      </ul>
 
-    <h3>Когда <a href="https://medium.com/nuances-of-programming/%D0%BF%D0%BE%D1%87%D0%B5%D0%BC%D1%83-lodash-%D0%BF%D0%BE-%D0%BF%D1%80%D0%B5%D0%B6%D0%BD%D0%B5%D0%BC%D1%83-%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%B5%D0%BD-5c6906df9617">бывает полезна</a></h3>
-    <ul>
-      <li>Когда структура объекта заранее неизвестна или может быть глубоко вложенной.</li>
-      <li>Когда нужно избежать ошибок при попытке доступа к несуществующим свойствам (например,
-        <code>Cannot read property 'x' of undefined'</code>).</li>
-      <li>Для обработки данных из API, где некоторые поля могут отсутствовать.</li>
-    </ul>
+      <h3>Где такая функция уже используется</h3>
+      <ul>
+        <li>
+          В библиотеке lodash функция называется <code>_.get</code> и широко
+          применяется для безопасного доступа к вложенным данным.
+        </li>
+        <li>
+          Аналогичные функции есть в других библиотеках, например, в Ramda
+          (<code>R.path</code>), а также в различных утилитах для
+          JavaScript/TypeScript.
+        </li>
+      </ul>
 
-    <h3>Где такая функция уже используется</h3>
-    <ul>
-      <li>В библиотеке lodash функция называется <code>_.get</code> и широко применяется для безопасного доступа к
-        вложенным данным.</li>
-      <li>Аналогичные функции есть в других библиотеках, например, в Ramda (<code>R.path</code>), а также в различных
-        утилитах для JavaScript/TypeScript.</li>
-    </ul>
-
-    <h3>Пример использования</h3>
-    <pre><code class="language-js">
+      <h3>Пример использования</h3>
+      <pre><code class="language-js">
       const obj = { user: { profile: { name: 'Ivan' } } };
 
       get(obj, 'user.profile.name', 'No name'); // вернет 'Ivan'
@@ -131,10 +199,12 @@
       get(obj, '', 'default');                  // вернет весь объект obj
       </code></pre>
 
-    <p><strong>Ваша задача — реализовать эту функцию самостоятельно, не используя lodash или другие сторонние
-        библиотеки.</strong></p>
-  </section>
-
-</body>
-
+      <p>
+        <strong
+          >Ваша задача — реализовать эту функцию самостоятельно, не используя
+          lodash или другие сторонние библиотеки.</strong
+        >
+      </p>
+    </section>
+  </body>
 </html>
