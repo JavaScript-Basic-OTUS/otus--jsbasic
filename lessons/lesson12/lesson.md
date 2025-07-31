@@ -32,9 +32,9 @@ description: "Работа с типами, JSDoc и TypeScript. Генерац�
 - **Функции**: глаголы (`getUser`, `calculateTotal`)
 - **Модули**: предметная область (`authService`, `logger`)
 - **Переменные**:
-    - булевы: `isValid`, `hasPermission`
-    - коллекции: `users`, `items`
-    - константы: `MAX_LENGTH`, `DEFAULT_TIMEOUT`
+  - булевы: `isValid`, `hasPermission`
+  - коллекции: `users`, `items`
+  - константы: `MAX_LENGTH`, `DEFAULT_TIMEOUT`
 
 <!--v-->
 
