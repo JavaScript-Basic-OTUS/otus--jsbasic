@@ -93,6 +93,10 @@ _А до этого были [`grunt`](https://gruntjs.com/) и [`gulp`](https:/
 
 <!-- v -->
 
+"Будущим" можно считать [vite](https://vite.dev/) и других
+
+<!-- v -->
+
 **Важно!** Последняя версия [webpack - `5.x.x`](https://webpack.js.org/blog/2020-10-10-webpack-5-release/), но не все модули обновились для использования с этой версией, так что помните про [`4.x.x`](https://v4.webpack.js.org/)
 
 <!-- v -->
@@ -125,7 +129,6 @@ _А до этого были [`grunt`](https://gruntjs.com/) и [`gulp`](https:/
 
 - [Github Pages](https://pages.github.com/)
 - [Vercel](https://vercel.com/)
-- [Heroku](https://www.heroku.com/)
 - [Surge](https://surge.sh/)
 
 <!-- v -->
@@ -147,7 +150,7 @@ _А до этого были [`grunt`](https://gruntjs.com/) и [`gulp`](https:/
 
 <!-- v -->
 
-В jest это можно сделать с помощью [параметра командной строки](https://jestjs.io/docs/ru/cli#--coverageboolean) или [настройки в конфигурации](https://jestjs.io/docs/ru/configuration#collectcoverage-boolean). Контролировать изменение параметра так же можно при помощи [соответствующей настройки coverage threshold](https://jestjs.io/docs/ru/configuration#coveragethreshold-object)
+В jest это можно сделать с помощью [параметра командной строки](https://jestjs.io/docs/cli#--coverageboolean) или [настройки в конфигурации](https://jestjs.io/docs/configuration#collectcoverage-boolean). Контролировать изменение параметра так же можно при помощи [соответствующей настройки coverage threshold](https://jestjs.io/docs/configuration#coveragethreshold-object)
 
 <!-- v -->
 
@@ -155,7 +158,7 @@ _А до этого были [`grunt`](https://gruntjs.com/) и [`gulp`](https:/
 
 <!-- s -->
 
-## [Домашнее задание](https://github.com/vvscode/otus--javascript-basic/blob/master/lessons/lesson09/homework.md)
+## [Домашнее задание](https://github.com/JavaScript-Basic-OTUS/otus--jsbasic/blob/master/lessons/lesson10/task.md)
 
 <!-- v -->
 
