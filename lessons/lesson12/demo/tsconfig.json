@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true, // Поддержка .js файлов
+    "checkJs": true, // Проверка типов в .js
+    "noEmit": true, // Не генерировать .js или .d.ts
+    "strict": true, // Включить строгий режим
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node", // Чтобы TypeScript находил d.ts
+    "baseUrl": "./src", // Упростить импорты при необходимости
+    "types": ["jest", "node"] // Явно не указываем глобальные типы, чтобы всё бралось из include
+  },
+  "include": ["src/**/*.js", "src/types.d.ts", "__tests__/**/*.js"],
+  "exclude": ["node_modules", "coverage", "docs"]
+}
