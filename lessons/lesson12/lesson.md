@@ -1,6 +1,6 @@
 ---
 title: Занятие 12
-description: "Работа с типами, JSDoc и TypeScript. Генерация документации и линтинг JS-файлов с типами"
+description: "Документирование кода - работа с типами и JSDoc. TypeScript"
 ---
 
 # OTUS
