@@ -140,31 +140,6 @@ console.log(b); // ?
 <!-- v -->
 
 ```js [1-30]
-// Create code for next conditions
-function calculate() {
-  /* put your code here */
-}
-calculate("+")(1)(2); // 3
-calculate("*")(2)(3); // 6
-```
-
-<!-- v -->
-
-```js [1-30]
-// Create code for next conditions
-let sum = function () {
-  /* put your code here */
-};
-let s = sum();
-alert(s()); // 0
-alert(s(1)()); // 1
-alert(s(1)(2)()); //3
-alert(s(3)(4)(5)()); // 12
-```
-
-<!-- v -->
-
-```js [1-30]
 (function (x) {
   return (function (y) {
     console.log(x); // ?
@@ -207,25 +182,6 @@ console.log(fnRes()); // ?
 const fnRes2 = fn();
 console.log(fnRes2()); //?
 console.log(fnRes2()); //?
-```
-
-<!-- v -->
-
-```js [1-30]
-/*
-- Do you understand the closure?
-- Yes!
-- Write a function, that does this next:
-*/
-const func = (a, b, c, d, e) => a + b + c + d + e;
-
-const hof = yourFunction(func);
-
-console.log(hof(1, 2, 3, 4, 5)); // 15
-console.log(hof(2, 3, 4)(5, 6)); // 20
-console.log(hof(3, 4)(5, 6)(7)); // 25
-console.log(hof(4, 5)(6)(7, 8)); // 30
-console.log(hof(5)(6)(7)(8)(9)); // 35
 ```
 
 <!-- v -->
@@ -377,74 +333,6 @@ console.log(a); // ?
 
 <!-- v -->
 
-```js [1-10]
-// Define a
-a == 1 && a == 2 && a == 3; // true
-```
-
-<!-- v -->
-
-```js [1-30]
-const fn = {};
-function valueAccessor(value) {
-  var accessor = function (newValue) {
-    if (arguments.length === 0) {
-      return value;
-    }
-    value = newValue;
-  };
-  accessor.__proto__ = fn;
-  return accessor;
-}
-const a = valueAccessor(5);
-fn.incrementValue = function () {
-  this(this() + 1);
-};
-a.incrementValue();
-a(); //?
-```
-
-<!-- v -->
-
-```js [1-30]
-// Update code for conditions
-function A() {
-  this.value = 1;
-}
-const B = function () {};
-/* put your code here */
-const b = new B();
-b.value === undefined; // should be true
-b instanceof A; // should be true
-```
-
-<!-- v -->
-
-<!-- eslint-skip -->
-
-```js [1-20]
-// create singleton
-const getInstance = /* put your code here */
-const o1 = getInstance();
-const o2 = getInstance();
-o1 instanceof User; // true
-o1 === o2; // true
-```
-
-<!-- v -->
-
-<!-- eslint-skip -->
-
-```js [1-20]
-// create singleton
-const User = /* your code */
-const u1 = new User(1);
-const u2 = new User(2);
-u1 === u2; // true
-```
-
-<!-- v -->
-
 ```js [1-30]
 var foo = {
   bar: function () {
@@ -458,10 +346,54 @@ typeof (f = foo.bar)(); // ?
 <!-- v -->
 
 ```js [1-30]
+/*
+- Do you understand the closure?
+- Yes!
+- Write a function, that does this next:
+*/
+const func = (a, b, c, d, e) => a + b + c + d + e;
+
+const hof = yourFunction(func);
+
+console.log(hof(1, 2, 3, 4, 5)); // 15
+console.log(hof(2, 3, 4)(5, 6)); // 20
+console.log(hof(3, 4)(5, 6)(7)); // 25
+console.log(hof(4, 5)(6)(7, 8)); // 30
+console.log(hof(5)(6)(7)(8)(9)); // 35
+```
+
+<!-- v -->
+
+```js [1-30]
 // Create “native” methods Define a repeatify function on the String object.
 // The function accepts an integer that specifies how many times the string has to be repeated.
 // The function returns the string repeated the number of times specified. For example:
 console.log("hello".repeatify(3)); // hellohellohello
+```
+
+<!-- v -->
+
+```js [1-30]
+// Create code for next conditions
+function calculate() {
+  /* put your code here */
+}
+calculate("+")(1)(2); // 3
+calculate("*")(2)(3); // 6
+```
+
+<!-- v -->
+
+```js [1-30]
+// Create code for next conditions
+let sum = function () {
+  /* put your code here */
+};
+let s = sum();
+alert(s()); // 0
+alert(s(1)()); // 1
+alert(s(1)(2)()); //3
+alert(s(3)(4)(5)()); // 12
 ```
 
 <!-- v -->
