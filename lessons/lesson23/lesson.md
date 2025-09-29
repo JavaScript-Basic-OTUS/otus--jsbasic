@@ -1,4 +1,5 @@
 # Lesson 23
+
 ## OTUS Javascript Basic
 
 ### Разделение логики и представления
@@ -9,32 +10,32 @@
 
 #### Цели занятия
 
-* Разобрать, как разделение кода на составляющие помогает с переиспользованием кода и его поддержкой (на простых примерах с запросами и DOM).
-* Узнать подходы: принцип единственной ответственности, представление, шаблонизация, сервисный слой, MVC и увидеть, как они выражаются в коде (используя то, что уже известно: функции, async/await, fetch, DOM, события).
-* На практике: маленькие примеры и рефакторинг (без классов — только функции).
+- Разобрать, как разделение кода на составляющие помогает с переиспользованием кода и его поддержкой (на простых примерах с запросами и DOM).
+- Узнать подходы: принцип единственной ответственности, представление, шаблонизация, сервисный слой, MVC и увидеть, как они выражаются в коде (используя то, что уже известно: функции, async/await, fetch, DOM, события).
+- На практике: маленькие примеры и рефакторинг (без классов — только функции).
 
 <!--v-->
 
 #### **Компетенции:**
-* Применение метанавыков для обработки информации и принятия решений.
-* Умение структурировать программы.
+
+- Применение метанавыков для обработки информации и принятия решений.
+- Умение структурировать программы.
 
 <!--v-->
 
 ### План занятия
 
-* Введение: Зачем разделять — как "сортировка" в коде 
-* Теория: Определения и подходы.
-* Маленькие примеры с запросами и DOM: "до/после"
-* Лайвкодинг: Плохой код → шаг за шагом в MVC 
-* Итоги
+- Введение: Зачем разделять — как "сортировка" в коде
+- Теория: Определения и подходы.
+- Маленькие примеры с запросами и DOM: "до/после"
+- Лайвкодинг: Плохой код → шаг за шагом в MVC
+- Итоги
 
 <!--s-->
 
 ### Введение:
 
 <!--v-->
-
 
 ### Почему разделение — это легко и выгодно?
 
@@ -55,15 +56,16 @@
 ### fetch в обработчике + DOM
 
 ```javascript
-document.getElementById('btn').addEventListener('click', async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+document.getElementById("btn").addEventListener("click", async () => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
   const data = await response.json();
-  document.getElementById('output').innerHTML = `<div>${JSON.stringify(data)}</div>`;
+  document.getElementById("output").innerHTML = `<div>${JSON.stringify(
+    data
+  )}</div>`;
 });
 ```
 
 Плохо: данные и отображение смешаны, нет переиспользования, любая ошибка в fetch ломает UI
-
 
 <!--s-->
 
@@ -79,10 +81,14 @@ document.getElementById('btn').addEventListener('click', async () => {
 
 ```javascript
 function renderDataAndFetch() {
-  fetch('https://jsonplaceholder.typicode.com/users/1')
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById('output').innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  fetch("https://jsonplaceholder.typicode.com/users/1")
+    .then((res) => res.json())
+    .then((data) => {
+      document.getElementById("output").innerHTML = `<pre>${JSON.stringify(
+        data,
+        null,
+        2
+      )}</pre>`;
     });
 }
 renderDataAndFetch();
@@ -90,20 +96,19 @@ renderDataAndFetch();
 
 Плохо: функция одновременно делает fetch и вставку в DOM, нарушается принцип единственной ответственности
 
-
 <!--s-->
 
 ### Шаблонизация
 
 Определение: генерация HTML из заготовки и данных.
 
-Пример: 
+Пример:
 
 <!--v-->
 
 ```js
 for (let i = 0; i < data.length; i++) {
-    html += '<p>' + data[i] + '</p>';
+  html += "<p>" + data[i] + "</p>";
 }
 ```
 
@@ -113,22 +118,21 @@ for (let i = 0; i < data.length; i++) {
 
 Функции для запросов и расчётов.
 
-Пример: 
+Пример:
 
 <!--v-->
 
 ### сервисный fetch встроен в обработчик
 
 ```javascript
-document.getElementById('btn').addEventListener('click', async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+document.getElementById("btn").addEventListener("click", async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
   const data = await res.json();
   console.log(data);
 });
 ```
 
 Плохо: нет переиспользования, каждый обработчик дублирует fetch, тестировать сложно
-
 
 <!--s-->
 
@@ -142,12 +146,11 @@ Controller — связывает (addEventListener → model → view).
 
 Преимущества: структура и масштабируемость.
 
-
 <!--s-->
 
 ### Примеры: "До" и "После"
 
-Используем fetch, addEventListener, innerHTML. 
+Используем fetch, addEventListener, innerHTML.
 
 Каждый пример: "плохой" (смешанный) и "хороший" (разделённый).
 
@@ -159,11 +162,11 @@ Controller — связывает (addEventListener → model → view).
 <button id="btn">Показать</button>
 <div id="name"></div>
 <script>
-function showName() {
-  var name = 'Алекс';
-  document.getElementById('name').innerHTML = 'Имя: ' + name;
-}
-document.getElementById('btn').addEventListener('click', showName);
+  function showName() {
+    var name = "Алекс";
+    document.getElementById("name").innerHTML = "Имя: " + name;
+  }
+  document.getElementById("btn").addEventListener("click", showName);
 </script>
 ```
 
@@ -174,13 +177,17 @@ document.getElementById('btn').addEventListener('click', showName);
 ### Пример 1: "После"
 
 ```javascript
-function getName() { return 'Алекс'; }
-
-function renderName(name) {
-  document.getElementById('name').innerHTML = `Имя: ${name}`;
+function getName() {
+  return "Алекс";
 }
 
-document.getElementById('btn').addEventListener('click', () => renderName(getName()));
+function renderName(name) {
+  document.getElementById("name").innerHTML = `Имя: ${name}`;
+}
+
+document
+  .getElementById("btn")
+  .addEventListener("click", () => renderName(getName()));
 ```
 
 Разделение: данные и представление отделены.
@@ -192,21 +199,20 @@ document.getElementById('btn').addEventListener('click', () => renderName(getNam
 ### Пример 2: "До" — список имён
 
 ```javascript
-const names = ['Маша', 'Петя'];
-let html = '<ul>';
+const names = ["Маша", "Петя"];
+let html = "<ul>";
 
 for (let i = 0; i < names.length; i++) {
   // Здесь потенциальная уязвимость:
-  // если names[i] придёт из ненадёжного источника, 
+  // если names[i] придёт из ненадёжного источника,
   // вставка через + в innerHTML позволит выполнить HTML/JS
-  html += '<li>' + names[i] + '</li>';
+  html += "<li>" + names[i] + "</li>";
 }
 
-html += '</ul>';
+html += "</ul>";
 
 // Здесь тоже уязвимость: innerHTML вставляет HTML напрямую
-document.getElementById('list').innerHTML = html;
-
+document.getElementById("list").innerHTML = html;
 ```
 
 Недостаток: небезопасно.
@@ -216,16 +222,16 @@ document.getElementById('list').innerHTML = html;
 ### Пример 2: "После" — шаблон
 
 ```javascript
-const names = ['Маша', 'Петя'];
+const names = ["Маша", "Петя"];
 
 function renderListSafe(items, containerId) {
   const container = document.getElementById(containerId);
 
   // создаём новый ul
-  const ul = document.createElement('ul');
+  const ul = document.createElement("ul");
 
-  items.map(name => {
-    const li = document.createElement('li');
+  items.map((name) => {
+    const li = document.createElement("li");
     li.textContent = name; // безопасно
     ul.appendChild(li);
   });
@@ -234,15 +240,12 @@ function renderListSafe(items, containerId) {
   container.replaceChildren(ul);
 }
 
-renderListSafe(names, 'list');
-
-
+renderListSafe(names, "list");
 ```
 
 безопаснее
 
 <!--s-->
-
 
 ### Пример 3: "До" — расчёт суммы
 
@@ -252,12 +255,13 @@ let sum = 0;
 for (let i = 0; i < prices.length; i++) {
   sum += prices[i];
 }
-document.getElementById('total').innerText = 'Сумма: ' + sum;
+document.getElementById("total").innerText = "Сумма: " + sum;
 ```
 
 Недостаток: логика и DOM смешаны.
 
 <!--v-->
+
 ### Пример 3: "После" — сервис
 
 ```javascript
@@ -265,7 +269,7 @@ function calculateSum(prices) {
   return prices.reduce((total, price) => total + price, 0);
 }
 function renderTotal(sum) {
-  document.getElementById('total').innerText = `Сумма: ${sum}`;
+  document.getElementById("total").innerText = `Сумма: ${sum}`;
 }
 renderTotal(calculateSum([100, 200]));
 ```
@@ -280,26 +284,27 @@ renderTotal(calculateSum([100, 200]));
 <button id="btn">Загрузить</button>
 <div id="user"></div>
 <script>
-document.getElementById('btn').addEventListener('click', function() {
-  fetch('https://jsonplaceholder.typicode.com/users/1')
-    .then(r => r.json())
-    .then(user => {
-      document.getElementById('user').innerHTML = user.name;
-    });
-});
+  document.getElementById("btn").addEventListener("click", function () {
+    fetch("https://jsonplaceholder.typicode.com/users/1")
+      .then((r) => r.json())
+      .then((user) => {
+        document.getElementById("user").innerHTML = user.name;
+      });
+  });
 </script>
 ```
 
 Недостаток: асинхронный код и DOM в обработчике.
 
 <!--v-->
+
 ### Пример 4: "После" — сервис + View
 
 ```javascript
 // Сервис: получает данные пользователя
 async function getUser(id) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-  if (!res.ok) throw new Error('Ошибка запроса');
+  if (!res.ok) throw new Error("Ошибка запроса");
   return await res.json();
 }
 
@@ -319,13 +324,14 @@ async function handleClick(id, containerId) {
 }
 
 // Пример привязки к кнопке
-document.getElementById('btn').addEventListener('click', () => handleClick(1, 'user'));
+document
+  .getElementById("btn")
+  .addEventListener("click", () => handleClick(1, "user"));
 ```
 
 Код становится чище и надёжнее.
 
 <!--s-->
-
 
 ### Практика
 
@@ -335,22 +341,20 @@ document.getElementById('btn').addEventListener('click', () => handleClick(1, 'u
 
 Основные выводы:
 
-* SRP, View, шаблоны, сервисы и MVC разделяют fetch и DOM.
-* Переиспользование: общие функции для разных мест.
+- SRP, View, шаблоны, сервисы и MVC разделяют fetch и DOM.
+- Переиспользование: общие функции для разных мест.
 
 <!-- v -->
 
-###  Домашнее задание: Смотрите на портале
-
+### Домашнее задание: Смотрите на портале
 
 <!--s-->
 
 ### Дополнительные материалы
 
-* SRP и SOLID в JavaScript
-* MVC без фреймворков
-* Шаблоны в JavaScript
-
+- SRP и SOLID в JavaScript
+- MVC без фреймворков
+- Шаблоны в JavaScript
 
 <!--s-->
 

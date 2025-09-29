@@ -8,25 +8,25 @@
 
 #### Цели занятия
 
-* Узнать подходы к проектированию частей приложения, которые упрощают поддержку и развитие.
-* Разобраться, почему важна низкая связанность и высокая связанность внутри модуля (cohesion), и как этого достичь.
-* Научиться выделять чистые функции и выносить побочные эффекты.
-* Освоить внедрение зависимостей (Dependency Injection) на функциях и модулях.
+- Узнать подходы к проектированию частей приложения, которые упрощают поддержку и развитие.
+- Разобраться, почему важна низкая связанность и высокая связанность внутри модуля (cohesion), и как этого достичь.
+- Научиться выделять чистые функции и выносить побочные эффекты.
+- Освоить внедрение зависимостей (Dependency Injection) на функциях и модулях.
 
 <!--v-->
 
 #### Компетенции
 
-* Владение синтаксисом JavaScript (модули `import`/`export`).
-* Применение метанавыков для обработки информации и принятия решений в разработке.
-* Умение структурировать программы и проектировать API модулей.
+- Владение синтаксисом JavaScript (модули `import`/`export`).
+- Применение метанавыков для обработки информации и принятия решений в разработке.
+- Умение структурировать программы и проектировать API модулей.
 
 <!--v-->
 
 #### Формат и результаты
 
-* Конспект занятия с примерами.
-* Длительность: 90 минут.
+- Конспект занятия с примерами.
+- Длительность: 90 минут.
 
 <!--s-->
 
@@ -47,10 +47,10 @@
 
 Модуль — это логически связанный кусок кода с чёткой зоной ответственности и внешним API (экспортами). Делим код, чтобы:
 
-* уменьшить когнитивную нагрузку (проще понимать части);
-* переиспользовать и тестировать;
-* изолировать изменения (правка внутри модуля не ломает остальные);
-* управлять зависимостями явно.
+- уменьшить когнитивную нагрузку (проще понимать части);
+- переиспользовать и тестировать;
+- изолировать изменения (правка внутри модуля не ломает остальные);
+- управлять зависимостями явно.
 
 <!--v-->
 
@@ -58,16 +58,16 @@
 
 ```js
 // app.js
-const form = document.querySelector('#form');
-const list = document.querySelector('#list');
+const form = document.querySelector("#form");
+const list = document.querySelector("#list");
 
 const items = [];
 
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const value = form.elements.namedItem('title').value;
+  const value = form.elements.namedItem("title").value;
   items.push(value);
-  list.innerHTML = items.map((x) => `<li>${x}</li>`).join('');
+  list.innerHTML = items.map((x) => `<li>${x}</li>`).join("");
 });
 ```
 
@@ -81,25 +81,27 @@ form.addEventListener('submit', (e) => {
 
 ```js
 // math.js — экспортируем ИМЕНОВАННО
-export function add(a, b) { return a + b; }
+export function add(a, b) {
+  return a + b;
+}
 
 // app.js — импортируем ИМЕНОВАННО
-import { add } from './math.js';
+import { add } from "./math.js";
 console.log(add(2, 3));
 ```
 
 <!--v-->
 
- Разделим по ролям (после):
+Разделим по ролям (после):
 
 ```js
 // view.js — модуль представления
 // export: функция renderList — отвечает только за отображение списка
 export function renderList(container, items) {
   container.replaceChildren(
-    Object.assign(document.createElement('ul'), {
-      innerHTML: items.map((x) => `<li>${x}</li>`).join(''),
-    }),
+    Object.assign(document.createElement("ul"), {
+      innerHTML: items.map((x) => `<li>${x}</li>`).join(""),
+    })
   );
 }
 ```
@@ -109,7 +111,9 @@ export function renderList(container, items) {
 ```js
 // model.js — модуль чистой логики (без DOM и побочных эффектов)
 // export: addItem — ЧИСТАЯ функция, возвращает новый массив
-export function addItem(model, value) { return [...model, value]; }
+export function addItem(model, value) {
+  return [...model, value];
+}
 ```
 
 <!--v-->
@@ -117,23 +121,23 @@ export function addItem(model, value) { return [...model, value]; }
 ```js
 // app.js — композиция модулей и работа с DOM-событиями
 // import: берём renderList из view.js и addItem из model.js
-import { renderList } from './view.js';
-import { addItem } from './model.js';
+import { renderList } from "./view.js";
+import { addItem } from "./model.js";
 
 // ссылки на DOM-элементы и локальное состояние
-const form = document.querySelector('#form');
-const list = document.querySelector('#list');
+const form = document.querySelector("#form");
+const list = document.querySelector("#list");
 let items = [];
 
 // первый рендер пустого списка
 renderList(list, items);
 
 // обработчик: читаем ввод → обновляем модель → перерисовываем
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const value = form.elements.namedItem('title').value; // читаем значение из формы
-  items = addItem(items, value);                        // чистая логика
-  renderList(list, items);                              // отображение
+  const value = form.elements.namedItem("title").value; // читаем значение из формы
+  items = addItem(items, value); // чистая логика
+  renderList(list, items); // отображение
 });
 ```
 
@@ -161,11 +165,11 @@ export function renderName(container, text) {
 }
 
 // app.js — импортируем и «склеиваем»
-import { fullName } from './logic.js';
-import { renderName } from './view.js';
+import { fullName } from "./logic.js";
+import { renderName } from "./view.js";
 
-const name = fullName('Иван', 'Иванов'); // чистая логика
-renderName(document.getElementById('out'), name); // отображение
+const name = fullName("Иван", "Иванов"); // чистая логика
+renderName(document.getElementById("out"), name); // отображение
 ```
 
 <!--v-->
@@ -174,9 +178,9 @@ renderName(document.getElementById('out'), name); // отображение
 
 ```js
 function submitFormAndRenderAndTrack(form, container, analytics) {
-  const value = form.elements.namedItem('email').value;
-  analytics.track('submit', { value });
-  fetch('https://jsonplaceholder.typicode.com/users/1')
+  const value = form.elements.namedItem("email").value;
+  analytics.track("submit", { value });
+  fetch("https://jsonplaceholder.typicode.com/users/1")
     .then((r) => r.json())
     .then((data) => {
       container.innerHTML = `<p>${data.name}</p>`;
@@ -193,14 +197,14 @@ function submitFormAndRenderAndTrack(form, container, analytics) {
 ```js
 // domain.js (чистая логика)
 export function getEmail(form) {
-  return form.elements.namedItem('email').value.trim();
+  return form.elements.namedItem("email").value.trim();
 }
 
 // api.js (эффект)
 // загрузка пользователя по id (GET)
 export async function loadUser(id, http) {
   const res = await http(`https://jsonplaceholder.typicode.com/users/${id}`);
-  if (!res.ok) throw new Error('Request failed');
+  if (!res.ok) throw new Error("Request failed");
   return res.json();
 }
 
@@ -210,15 +214,15 @@ export function renderStatus(container, status) {
 }
 
 // app.js (склейка)
-import { getEmail } from './domain.js';
-import { loadUser } from './api.js';
-import { renderStatus } from './view.js';
+import { getEmail } from "./domain.js";
+import { loadUser } from "./api.js";
+import { renderStatus } from "./view.js";
 
 const http = window.fetch.bind(window); // внедряем зависимость
 
 async function onSubmit(form, container, analytics) {
   const email = getEmail(form);
-  analytics.track('submit', { email });
+  analytics.track("submit", { email });
   const user = await loadUser(1, http); // загрузка пользователя
   renderStatus(container, user.name);
 }
@@ -230,29 +234,35 @@ async function onSubmit(form, container, analytics) {
 
 Чистая функция:
 
-* зависит только от входных параметров;
-* не меняет внешнее состояние (нет побочных эффектов);
-* при одинаковом входе — одинаковый выход.
+- зависит только от входных параметров;
+- не меняет внешнее состояние (нет побочных эффектов);
+- при одинаковом входе — одинаковый выход.
 
 <!--v-->
 
 Примеры чистых функций:
 
 ```js
-function sum(a, b) { return a + b; }
+function sum(a, b) {
+  return a + b;
+}
 
-function addItem(items, v) { return [...items, v]; }
+function addItem(items, v) {
+  return [...items, v];
+}
 
-function formatName(user) { return `${user.last} ${user.first}`.trim(); }
+function formatName(user) {
+  return `${user.last} ${user.first}`.trim();
+}
 ```
 
 <!--v-->
 
 Побочные эффекты (IO):
 
-* DOM-операции (`innerHTML`, `addEventListener`),
-* сеть (`fetch`, `WebSocket`),
-* логирование (`console.log`).
+- DOM-операции (`innerHTML`, `addEventListener`),
+- сеть (`fetch`, `WebSocket`),
+- логирование (`console.log`).
 
 Подход: вынести эффекты на «края» приложения, оставить «ядро» чистым.
 
@@ -264,12 +274,14 @@ function formatName(user) { return `${user.last} ${user.first}`.trim(); }
 // до — смешение расчёта и эффекта (лог)
 function addAndLog(items, v) {
   const next = [...items, v];
-  console.log('Updated:', next);
+  console.log("Updated:", next);
   return next;
 }
 
 // после — чистое ядро + эффект отдельно
-function add(items, v) { return [...items, v]; } // чистая
+function add(items, v) {
+  return [...items, v];
+} // чистая
 
 function logItems(prefix, items) {
   console.log(prefix, items);
@@ -305,9 +317,12 @@ export function formatCurrency(value) {
 
 ```js
 // app.js — используем связный модуль как единое целое
-import { subtotal, applyDiscount, formatCurrency } from './price.js';
+import { subtotal, applyDiscount, formatCurrency } from "./price.js";
 
-const items = [{ price: 100, qty: 2 }, { price: 50, qty: 1 }];
+const items = [
+  { price: 100, qty: 2 },
+  { price: 50, qty: 1 },
+];
 const sum = subtotal(items);
 const discounted = applyDiscount(sum, 10);
 console.log(formatCurrency(discounted));
@@ -321,7 +336,7 @@ console.log(formatCurrency(discounted));
 // api/users.js — функция зависит только от интерфейса http(url, init)
 export async function getUser(http, id) {
   const res = await http(`https://jsonplaceholder.typicode.com/users/${id}`);
-  if (!res.ok) throw new Error('HTTP error');
+  if (!res.ok) throw new Error("HTTP error");
   return res.json();
 }
 
@@ -355,7 +370,7 @@ loadProfile(http, 1);
 В тесте можно подменить `http` стабом:
 
 ```js
-const fakeHttp = async () => ({ json: async () => ({ id: 1, name: 'Test' }) });
+const fakeHttp = async () => ({ json: async () => ({ id: 1, name: "Test" }) });
 loadProfile(fakeHttp, 1).then((p) => console.log(p));
 ```
 
@@ -368,14 +383,22 @@ DI на модуле (фабрика):
 export function makeCounter(start = 0) {
   let value = start;
   return {
-    inc() { value += 1; return value; },
-    dec() { value -= 1; return value; },
-    get() { return value; },
+    inc() {
+      value += 1;
+      return value;
+    },
+    dec() {
+      value -= 1;
+      return value;
+    },
+    get() {
+      return value;
+    },
   };
 }
 
 // app.js
-import { makeCounter } from './counter.js';
+import { makeCounter } from "./counter.js";
 const counter = makeCounter(0);
 counter.inc();
 ```
@@ -388,13 +411,13 @@ counter.inc();
 
 ```js
 // запись строки
-localStorage.setItem('greeting', 'hello');
+localStorage.setItem("greeting", "hello");
 
 // чтение строки
-const text = localStorage.getItem('greeting'); // 'hello' или null
+const text = localStorage.getItem("greeting"); // 'hello' или null
 
 // удаление
-localStorage.removeItem('greeting');
+localStorage.removeItem("greeting");
 ```
 
 <!--v-->
@@ -403,11 +426,11 @@ localStorage.removeItem('greeting');
 
 ```js
 // сохраняем объект — сначала сериализуем
-const user = { id: 1, name: 'Alex' };
-localStorage.setItem('user', JSON.stringify(user));
+const user = { id: 1, name: "Alex" };
+localStorage.setItem("user", JSON.stringify(user));
 
 // читаем и парсим
-const raw = localStorage.getItem('user');
+const raw = localStorage.getItem("user");
 const parsed = raw ? JSON.parse(raw) : null;
 ```
 
@@ -423,8 +446,11 @@ export function saveJSON(key, value) {
 
 export function loadJSON(key, fallback = null) {
   const raw = localStorage.getItem(key);
-  try { return raw ? JSON.parse(raw) : fallback; }
-  catch { return fallback; }
+  try {
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
 }
 ```
 
@@ -437,10 +463,14 @@ export function loadJSON(key, fallback = null) {
 ```js
 // model.js — чистые функции для списка (без id)
 // addTodo — не меняет исходный массив, возвращает новый
-export function addTodo(list, text) { return [...list, text]; }
+export function addTodo(list, text) {
+  return [...list, text];
+}
 
 // clearTodos — возвращает новый пустой список
-export function clearTodos() { return []; }
+export function clearTodos() {
+  return [];
+}
 ```
 
 <!--v-->
@@ -448,15 +478,21 @@ export function clearTodos() { return []; }
 ```js
 // storage.js — обёртки над localStorage
 // ключ, под которым храним список задач
-const KEY = 'todos';
+const KEY = "todos";
 
 // save — сохраняет список как JSON-строку
-export function save(list) { localStorage.setItem(KEY, JSON.stringify(list)); }
+export function save(list) {
+  localStorage.setItem(KEY, JSON.stringify(list));
+}
 
 // load — читает список и парсит JSON, при ошибке вернёт []
 export function load() {
   const raw = localStorage.getItem(KEY);
-  try { return raw ? JSON.parse(raw) : []; } catch { return []; }
+  try {
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
 }
 ```
 
@@ -469,7 +505,6 @@ export function load() {
   <input id="todo-input" placeholder="Новая задача" />
   <button type="submit">Добавить</button>
   <button type="button" id="todo-clear">Очистить</button>
-  
 </form>
 
 <!-- контейнер для списка -->
@@ -483,13 +518,15 @@ export function load() {
 // простая отрисовка элементов списка в виде <li>
 // export: функция, которая принимает контейнер и массив строк
 export function renderList(container, list) {
-  container.innerHTML = list.map((t) => `<li>${t}</li>`).join('');
+  container.innerHTML = list.map((t) => `<li>${t}</li>`).join("");
 }
 
 // renderListWithIndex — отрисовка списка с индексами
 // export: функция, которая принимает контейнер и массив строк
 export function renderListWithIndex(container, list) {
-  container.innerHTML = list.map((t, i) => `<li data-index="${i}">${t}</li>`).join('');
+  container.innerHTML = list
+    .map((t, i) => `<li data-index="${i}">${t}</li>`)
+    .join("");
 }
 ```
 
@@ -498,33 +535,33 @@ export function renderListWithIndex(container, list) {
 ```js
 // app.js — склейка
 // import: берём чистые функции модели, обёртки для storage и функцию отображения
-import { addTodo, clearTodos } from './model.js';
-import { save, load } from './storage.js';
-import { renderList } from './view.js';
+import { addTodo, clearTodos } from "./model.js";
+import { save, load } from "./storage.js";
+import { renderList } from "./view.js";
 
 // ссылки на элементы интерфейса
-const form = document.querySelector('#todo-form');
-const input = document.querySelector('#todo-input');
-const listEl = document.querySelector('#todo-list');
-const clearBtn = document.querySelector('#todo-clear');
+const form = document.querySelector("#todo-form");
+const input = document.querySelector("#todo-input");
+const listEl = document.querySelector("#todo-list");
+const clearBtn = document.querySelector("#todo-clear");
 
 // инициализация состояния из localStorage
 let todos = load();
 renderList(listEl, todos);
 
 // обработка добавления: берём текст → новая версия списка → сохраняем → перерисовываем
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   const text = input.value.trim();
   if (!text) return;
   todos = addTodo(todos, text);
   save(todos);
   renderList(listEl, todos);
-  input.value = '';
+  input.value = "";
 });
 
 // очистка списка по кнопке
-clearBtn.addEventListener('click', () => {
+clearBtn.addEventListener("click", () => {
   todos = clearTodos();
   save(todos);
   renderList(listEl, todos);
@@ -551,7 +588,9 @@ const addWithNow = makeAddWithNow(() => Date.now());
 ```js
 // Дополнительно: удаление последнего элемента
 // model.popLast — возвращает новый список без последнего элемента
-export function popLast(list) { return list.slice(0, -1); }
+export function popLast(list) {
+  return list.slice(0, -1);
+}
 
 // app.js — добавляем обработчик для кнопки #todo-pop
 // const popBtn = document.querySelector('#todo-pop');
@@ -573,7 +612,9 @@ export function removeAt(list, index) {
 
 // view.js — добавляем data-index для каждого <li> (пример альтернативной отрисовки)
 export function renderListWithIndex(container, list) {
-  container.innerHTML = list.map((t, i) => `<li data-index="${i}">${t}</li>`).join('');
+  container.innerHTML = list
+    .map((t, i) => `<li data-index="${i}">${t}</li>`)
+    .join("");
 }
 
 // app.js — делегирование событий: удаляем пункт, по которому кликнули
@@ -586,6 +627,7 @@ export function renderListWithIndex(container, list) {
 //   renderListWithIndex(listEl, todos);
 // });
 ```
+
 <!-- s -->
 
 ### 7. Мини-рефакторинг: «до/после»
@@ -595,7 +637,7 @@ export function renderListWithIndex(container, list) {
 ```js
 async function onClick(btn, container) {
   btn.disabled = true;
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
   const user = await res.json();
   container.innerHTML = `<h3>${user.name}</h3>`;
   btn.disabled = false;
@@ -627,13 +669,17 @@ export function makeShowUserFlow({ http, toVM, render }) {
 }
 
 // app.js
-import { makeShowUserFlow } from './app/flows.js';
-import { toUserViewModel } from './domain/userViewModel.js';
-import { renderUser } from './ui/render.js';
+import { makeShowUserFlow } from "./app/flows.js";
+import { toUserViewModel } from "./domain/userViewModel.js";
+import { renderUser } from "./ui/render.js";
 
 const http = (url, init) => fetch(url, init);
 
-const showUser = makeShowUserFlow({ http, toVM: toUserViewModel, render: renderUser });
+const showUser = makeShowUserFlow({
+  http,
+  toVM: toUserViewModel,
+  render: renderUser,
+});
 ```
 
 Результат: проще тестировать и менять отдельно представление и сеть.
@@ -642,15 +688,17 @@ const showUser = makeShowUserFlow({ http, toVM: toUserViewModel, render: renderU
 
 ### 8. Частые анти-паттерны и как их исправить
 
-
 #### (плохо) → SRP и разбиение (хорошо)
 
 ```js
 // плохо — функция делает и валидацию, и запрос, и рендер
 async function handle(form, container) {
-  const email = form.elements.namedItem('email').value;
-  if (!email.includes('@')) { container.textContent = 'bad email'; return; }
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+  const email = form.elements.namedItem("email").value;
+  if (!email.includes("@")) {
+    container.textContent = "bad email";
+    return;
+  }
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
   const data = await res.json();
   container.textContent = data.name;
 }
@@ -658,13 +706,24 @@ async function handle(form, container) {
 
 ```js
 // хорошо — разделение обязанностей
-function validateEmail(email) { return email.includes('@'); }
-function renderStatus(container, text) { container.textContent = text; }
-async function loadUser(http, id) { return (await http(`https://jsonplaceholder.typicode.com/users/${id}`)).json(); }
+function validateEmail(email) {
+  return email.includes("@");
+}
+function renderStatus(container, text) {
+  container.textContent = text;
+}
+async function loadUser(http, id) {
+  return (
+    await http(`https://jsonplaceholder.typicode.com/users/${id}`)
+  ).json();
+}
 
 async function onSubmit(http, form, container) {
-  const email = form.elements.namedItem('email').value;
-  if (!validateEmail(email)) { renderStatus(container, 'bad email'); return; }
+  const email = form.elements.namedItem("email").value;
+  if (!validateEmail(email)) {
+    renderStatus(container, "bad email");
+    return;
+  }
   const data = await loadUser(http, 1);
   renderStatus(container, data.name);
 }
@@ -695,7 +754,9 @@ function addTag(user, tag) {
 
 ```js
 // плохо
-function isExpired(expAt) { return Date.now() > expAt; }
+function isExpired(expAt) {
+  return Date.now() > expAt;
+}
 
 // хорошо (DI времени)
 function makeIsExpired(now) {
@@ -716,10 +777,10 @@ const isExpired = makeIsExpired(() => Date.now());
 
 Основные выводы:
 
-* SRP упрощает сопровождение: одна ответственность — одна причина менять код.
-* Чистые функции — ядро, эффекты — по краям.
-* Низкая связанность достигается через явные интерфейсы и DI.
-* Модули `import/export` помогают структурировать код и API.
+- SRP упрощает сопровождение: одна ответственность — одна причина менять код.
+- Чистые функции — ядро, эффекты — по краям.
+- Низкая связанность достигается через явные интерфейсы и DI.
+- Модули `import/export` помогают структурировать код и API.
 
 <!-- v -->
 
@@ -732,10 +793,10 @@ const isExpired = makeIsExpired(() => Date.now());
 
 ### Дополнительные материалы
 
-* MDN: Modules — `import`/`export`.
-* Статья: Принцип единственной ответственности (SRP).
-* Pure functions and side effects (FP intro).
-* Внедрение зависимостей без фреймворков (на функциях и фабриках).
+- MDN: Modules — `import`/`export`.
+- Статья: Принцип единственной ответственности (SRP).
+- Pure functions and side effects (FP intro).
+- Внедрение зависимостей без фреймворков (на функциях и фабриках).
 
 <!--s-->
 
