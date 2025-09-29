@@ -7,9 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "reveal-md",
     "lint:prettier": "prettier --check .",
+    "lint:prettier:fix": "prettier --write .",
     "lint:spell": "yaspeller .",
     "lint": "npm run lint:prettier && npm run lint:code",
+    "lint:fix": "npm run lint:prettier:fix && npm run lint:code:fix",
     "lint:code": "eslint --ext .js,.ts,.md .",
+    "lint:code:fix": "eslint --ext .js,.ts,.md . --fix",
     "prepare": "husky install"
   },
   "keywords": [],
