@@ -52,7 +52,13 @@ const handleMouseLeave = () => setIsHovered(false);
 
 <!-- v -->
 
-HOC
+HOC (Higher-Order Components)
+
+- Функция, которая принимает компонент и возвращает новый компонент
+- Позволяет добавлять логику "снаружи"
+- Используется для переиспользования поведения
+
+<!-- v -->
 
 ```jsx
 function withHover(WrappedComponent) {
@@ -78,7 +84,26 @@ export default withHover(MyComponent);
 
 <!-- v -->
 
+Плюсы:
+
+- Разделение обязанностей (UI отдельно, логика отдельно)
+- Легко оборачивать несколько компонентов
+
+Минусы:
+
+- "Wrapper hell" (дерево компонентов сильно усложняется)
+- Возможны конфликты props
+- Логика скрыта внутри обёртки
+
+<!-- v -->
+
 Render Props
+
+- Компонент принимает функцию как child
+- Эта функция управляет тем, что будет отрисовано
+- Позволяет гибко делиться состоянием и поведением
+
+<!-- v -->
 
 ```jsx
 function Hover({ children }) {
@@ -106,13 +131,19 @@ function App() {
 
 <!-- v -->
 
-Оба подхода рабочие, но имеют недостатки:
+Плюсы:
 
-- "Wrapper Hell": Дерево компонентов разрастается за счет оберток.
-- Неявные зависимости: Сложно понять, откуда приходят props.
-- Конфликты имен: Props от разных HOC могут перезаписывать друг друга.
+- Гибкость — родитель решает, как отрисовать
+- Чёткий контроль над данными
+
+Минусы:
+
+- Синтаксис иногда "шумный"
+- Легко создать "пирамиду функций"
 
 <!-- v -->
+
+Оба подхода рабочие, но имеют недостатки
 
 Хуки предложили более элегантное решение.
 
@@ -218,26 +249,25 @@ function UserProfile() {
 Создаем хук useRequest
 
 ```jsx
-Копировать код
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export function useRequest(url) {
-    const [data, setData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (!url) return;
+  useEffect(() => {
+    if (!url) return;
 
-        setIsLoading(true);
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setData(data))
-            .catch(err => setError(err))
-            .finally(() => setIsLoading(false));
-    }, [url]);
+    setIsLoading(true);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => setError(err))
+      .finally(() => setIsLoading(false));
+  }, [url]);
 
-    return { data, isLoading, error };
+  return { data, isLoading, error };
 }
 ```
 
@@ -267,10 +297,9 @@ function UserProfile({ userId }) {
 хук useInput
 
 ```jsx
-Копировать код
 function useInput(initial = "") {
   const [value, setValue] = useState(initial);
-  const onChange = e => setValue(e.target.value);
+  const onChange = (e) => setValue(e.target.value);
   return { value, onChange };
 }
 ```
