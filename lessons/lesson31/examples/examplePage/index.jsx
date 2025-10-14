@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 // const heavyDouble = (num) => {
 //   let result = 0;
@@ -12,9 +12,9 @@ import { useState } from "react"
 // }
 
 export default function ExamplePage() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  const incrementCount = () => {}
+  const incrementCount = () => {};
 
   return (
     <>
@@ -22,11 +22,11 @@ export default function ExamplePage() {
       <CountInfo />
       <button> + 1 </button>
     </>
-  )
+  );
 }
 
 const Title = () => {
-  <h1>Example</h1>
-}
+  <h1>Example</h1>;
+};
 
-const CountInfo = ({count}) => <h3>Count value {count}</h3>
+const CountInfo = ({ count }) => <h3>Count value {count}</h3>;
