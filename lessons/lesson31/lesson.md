@@ -25,8 +25,6 @@ description: "Hooks в React: useState, useEffect, useCallback, useMemo"
 
 <!-- v -->
 
-Жизненные этапы и циклы React-компонента
-
 <img src="./images/react-lifecycle.jpg" title="react lifecicles" />
 
 <!-- v -->
@@ -52,6 +50,46 @@ const [state, setState] = useState(initialState);
 - **Текущее состояние** (state). Во время первого рендера оно будет соответствовать переданному вами **initialState**.
 
 - **Функция set** (setState), которая позволяет обновить состояние до другого значения и вызвать повторный рендеринг.
+
+<!-- v -->
+
+<small>
+
+Разница между setAge(age => age + 1) и setAge(age + 1)
+
+1. React НЕ обновляет состояние сразу
+2. Обновления ставятся в очередь
+3. Батчинг (batch) - несколько setState (обновлений состояния) за один рендер
+
+</small>
+
+```jsx
+// ❌ ПЛОХО - не работает
+function Counter() {
+  const [age, setAge] = useState(0);
+
+  const increment = () => {
+    setAge(age + 1); // setCount(0 + 1) → setCount(1)
+    setAge(age + 1); // setCount(0 + 1) → setCount(1)
+    // Результат: age увеличится только на 1, а не на 2!
+  };
+
+  return <button onClick={increment}>+2</button>;
+}
+
+// ✅ ХОРОШО - работает правильно
+function Counter() {
+  const [age, setAge] = useState(0);
+
+  const increment = () => {
+    setAge((prev) => prev + 1); // prev = 0 → 1
+    setAge((prev) => prev + 1); // prev = 1 → 2
+    // Результат: age = 2
+  };
+
+  return <button onClick={increment}>+2</button>;
+}
+```
 
 <!-- v -->
 
@@ -165,8 +203,8 @@ export default function Form() {
 
 <!-- v -->
 
-[useEffect](https://ru.react.dev/reference/react/useEffect) позволяет управлять различными сопутствующими действиями в функциональном компоненте или то, что называется **_"side effects" (побочные эффекты)_**,  
-например, извлечение данных, ручное изменение структуры DOM, использование таймеров, логгирование и т.д.
+- [useEffect](https://ru.react.dev/reference/react/useEffect) позволяет управлять различными сопутствующими действиями в функциональном компоненте или то, что называется **_"side effects" (побочные эффекты)_**,  
+  например, извлечение данных, ручное изменение структуры DOM, использование таймеров, логгирование и т.д.
 
 <!-- v -->
 
@@ -272,6 +310,56 @@ export default function UseEffectPage({ userId = 2 }) {
   );
 }
 ```
+
+<!-- v -->
+
+Как правильно использовать асинхронные функции в React useEffect
+
+```jsx
+// !!! Не делайте так!
+useEffect(async () => {
+  const data = await fetchData();
+}, []);
+```
+
+- Проблема: useEffect ожидает функцию, которая возвращает либо undefined, либо функцию очистки, а async функция возвращает Promise.
+
+<!-- v -->
+
+Правильный способ
+
+```jsx
+useEffect(() => {
+  const fetchData = async () => {
+    const data = await fetch("https://api.com");
+    const json = await data.json();
+    setData(json); // Обновляем состояние ВНУТРИ асинхронной функции
+  };
+
+  fetchData().catch(console.error);
+}, []);
+```
+
+```jsx
+// функция вынесена наружу
+const fetchData = useCallback(async () => {
+  const data = await fetch("https://api.com");
+  setData(data);
+}, []);
+
+useEffect(() => {
+  fetchData().catch(console.error);
+}, [fetchData]);
+```
+
+<!-- v -->
+
+Ключевые моменты:
+
+1. Не делайте useEffect async - это нарушает его контракт
+2. Создавайте асинхронные функции внутри useEffect
+3. Обрабатывайте ошибки с помощью .catch()
+4. Используйте useCallback если выносите функцию наружу
 
 <!-- v -->
 
