@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useState } from "react";
 import code from "./../../assets/useState.png";
 

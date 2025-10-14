@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+/* eslint-disable react/react-in-jsx-scope */
 import { memo } from "react";
 
 // Дочерний компонент, который мы хотим оптимизировать

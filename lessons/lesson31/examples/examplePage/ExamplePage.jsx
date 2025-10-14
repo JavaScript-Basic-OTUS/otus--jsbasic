@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
+/* eslint-disable react/react-in-jsx-scope */
 import React, { useState, memo, useMemo, useCallback } from "react";
 
 const heavyDouble = (num) => {

@@ -1,3 +1,5 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/prop-types */
 import { useMemo } from "react";
 
 export default function TodoList({ todos, filter }) {

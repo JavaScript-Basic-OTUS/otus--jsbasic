@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { useCallback, useState } from "react";
 
 import { CounterButton } from "./CounterButton";
@@ -47,7 +48,7 @@ function UseCallbackPage() {
         Принудительный перерендер ({dummy})
       </button>
 
-      <p>Откройте консоль и нажимайте "Принудительный перерендер"</p>
+      <p>Откройте консоль и нажимайте Принудительный перерендер</p>
     </div>
   );
 }
