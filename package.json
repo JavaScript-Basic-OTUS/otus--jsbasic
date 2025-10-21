@@ -13,7 +13,7 @@
     "lint:fix": "npm run lint:prettier:fix && npm run lint:code:fix",
     "lint:code": "eslint --ext .js,.ts,.md .",
     "lint:code:fix": "eslint --ext .js,.ts,.md . --fix",
-    "prepare": "husky install"
+    "prepare": "husky install && npx patch-package"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "eslint-plugin-react": "^7.31.10",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "patch-package": "^8.0.1",
     "prettier": "^2.7.1",
     "reveal-md": "^6.1.4",
     "typescript": "^4.8.4",

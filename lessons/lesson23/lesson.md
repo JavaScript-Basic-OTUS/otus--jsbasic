@@ -1,3 +1,8 @@
+---
+title: Занятие 23
+description: Разделение логики и представления
+---
+
 # Lesson 23
 
 ## OTUS Javascript Basic
