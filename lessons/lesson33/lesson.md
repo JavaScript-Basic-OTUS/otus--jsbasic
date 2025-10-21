@@ -274,7 +274,7 @@ ReactDOM.createRoot(root).render(
 <!-- v -->
 
 ```jsx
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router";
 
 function Home() {
   return <h2>Главная</h2>;
