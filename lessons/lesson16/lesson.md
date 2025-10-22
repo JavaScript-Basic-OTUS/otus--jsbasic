@@ -1,6 +1,6 @@
 ---
 title: Занятие 16
-description: Базовое использование API и JavaScript. Как работать с сетевыми ресурсами
+description: Базовое использование асинхронных API в Javascript
 ---
 
 # OTUS
