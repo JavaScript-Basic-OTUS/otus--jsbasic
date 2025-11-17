@@ -104,12 +104,15 @@ jobs: # Группа заданий
 
 ### GitHub Actions vs конкуренты
 
-| Параметр        | GitHub Actions                                                                                                                 | GitLab CI                                                                                | Travis CI                                                  |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| **Интеграция**  | Встроена в [GitHub](https://github.com/features/actions)                                                                       | Часть [GitLab](https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/) | Внешний сервис [Travis](https://www.travis-ci.com/)        |
-| **Marketplace** | 20 000+ Actions ([Marketplace](https://github.com/marketplace?type=actions))                                                   | [GitLab Catalog](https://gitlab.com/explore)                                             | Ограниченный каталог                                       |
-| **Free Tier**   | 2 000 мин ([Billing](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions)) | 400 мин ([GitLab Pricing](https://about.gitlab.com/pricing/))                            | Ограничено ([Travis Pricing](https://travis-ci.com/plans)) |
-
+<table>
+<thead><tr><th>Параметр</th><th>GitHub Actions</th><th>GitLab CI</th><th>Travis CI</th></tr></thead>
+<tbody>
+<tr><td><strong>Интеграция</strong></td><td>Встроена в <a href="https://github.com/features/actions">GitHub</a></td><td>Часть <a href="https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/" rel="nofollow">GitLab</a></td><td>Внешний сервис <a href="https://www.travis-ci.com/" rel="nofollow">Travis</a></td></tr>
+<tr>
+<td><strong>Marketplace</strong></td><td>20 000+ Actions (<a href="https://github.com/marketplace?type=actions">Marketplace</a>)</td><td><a href="https://gitlab.com/explore" rel="nofollow">GitLab Catalog</a></td><td>Ограниченный каталог</td></tr>
+<tr><td><strong>Free Tier</strong></td><td>2 000 мин (<a href="https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions">Billing</a>)</td><td>400 мин (<a href="https://about.gitlab.com/pricing/" rel="nofollow">GitLab Pricing</a>)</td><td>Ограничено (<a href="https://travis-ci.com/plans" rel="nofollow">Travis Pricing</a>)</td></tr>
+</tbody>
+</table>
 <!--v-->
 
 #### Преимущества GitHub Actions
