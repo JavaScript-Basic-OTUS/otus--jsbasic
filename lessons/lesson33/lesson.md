@@ -1,5 +1,5 @@
 ---
-title: Занятие 34
+title: Занятие 33
 description: Подключение дополнительных библиотек в экосистеме React (роутинг и визуальные компоненты)
 ---
 
@@ -274,7 +274,7 @@ ReactDOM.createRoot(root).render(
 <!-- v -->
 
 ```jsx
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router";
 
 function Home() {
   return <h2>Главная</h2>;
