@@ -25,6 +25,24 @@ description: "Hooks в React: useState, useEffect, useCallback, useMemo"
 
 <!-- v -->
 
+Жизненный цикл компонента в React
+
+```
+1. МОНТИРОВАНИЕ - Mounting
+   ├── Конструктор / useState
+   ├── Рендер (первый)
+   └── useEffect с пустым массивом зависимостей
+
+2. ОБНОВЛЕНИЕ - Updating (может повторяться много раз)
+   ├── Рендер (из-за изменения пропсов/состояния)
+   └── useEffect (в зависимости от deps)
+
+3. РАЗМОНТИРОВАНИЕ - Unmounting
+   └── Функция очистки useEffect
+```
+
+<!-- v -->
+
 <img src="./images/react-lifecycle.jpg" title="react lifecicles" />
 
 <!-- v -->
@@ -66,12 +84,12 @@ const [state, setState] = useState(initialState);
 ```jsx
 // ❌ ПЛОХО - не работает
 function Counter() {
-  const [age, setAge] = useState(0);
+  const [count, setCount] = useState(0);
 
   const increment = () => {
-    setAge(age + 1); // setCount(0 + 1) → setCount(1)
-    setAge(age + 1); // setCount(0 + 1) → setCount(1)
-    // Результат: age увеличится только на 1, а не на 2!
+    setCount(count + 1); // setCount(0 + 1) → setCount(1)
+    setCount(count + 1); // setCount(0 + 1) → setCount(1)
+    // Результат: count увеличится только на 1, а не на 2!
   };
 
   return <button onClick={increment}>+2</button>;
@@ -79,12 +97,12 @@ function Counter() {
 
 // ✅ ХОРОШО - работает правильно
 function Counter() {
-  const [age, setAge] = useState(0);
+  const [count, setCount] = useState(0);
 
   const increment = () => {
-    setAge((prev) => prev + 1); // prev = 0 → 1
-    setAge((prev) => prev + 1); // prev = 1 → 2
-    // Результат: age = 2
+    setCount((prev) => prev + 1); // prev = 0 → 1
+    setCount((prev) => prev + 1); // prev = 1 → 2
+    // Результат: count = 2
   };
 
   return <button onClick={increment}>+2</button>;
@@ -290,9 +308,10 @@ export default function UseEffectPage({ userId = 2 }) {
 
   useEffect(() => {
     if (!userId) return;
+    setIsLoading(true);
 
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-      .then((response) => response.json)
+      .then((response) => response.json())
       .then((json) => setUser(json))
       .catch((error) => console.error("Ошибка загрузки:", error))
       .finally(() => setIsLoading(false));
