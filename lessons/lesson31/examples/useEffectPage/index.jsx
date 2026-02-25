@@ -45,7 +45,7 @@ function UseEffectPage3({ userId = 2 }) {
   // Эффект, зависящий от userId
   useEffect(() => {
     if (!userId) return;
-    setIsLoading(true)
+    setIsLoading(true);
 
     console.log("Сработаю при монтировании и изменении userId");
 

@@ -17,12 +17,11 @@ function UseMemoPage() {
   const [filter, setFilter] = useState("all");
   const [counter, setCounter] = useState(0);
 
-
   return (
     <div style={{ padding: "20px" }}>
       <h1>useMemo</h1>
 
-      <button onClick={() => setCounter(c => c + 1)}>
+      <button onClick={() => setCounter((count) => count + 1)}>
         Счётчик: {counter} (не влияет на TodoList!)
       </button>
 
