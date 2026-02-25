@@ -45,11 +45,12 @@ function UseEffectPage3({ userId = 2 }) {
   // Эффект, зависящий от userId
   useEffect(() => {
     if (!userId) return;
+    setIsLoading(true)
 
     console.log("Сработаю при монтировании и изменении userId");
 
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-      .then((response) => response.json)
+      .then((response) => response.json())
       .then((json) => setUser(json))
       .catch((error) => console.error("Ошибка загрузки:", error))
       .finally(() => setIsLoading(false));
