@@ -11,7 +11,7 @@ jobs:
 
       - name: Install Packages
         run: |
-          npm install
+          npm ci
       - name: Lint
         run: |
           npm run lint
