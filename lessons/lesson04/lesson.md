@@ -36,9 +36,9 @@ description: Тестирование кода как часть процесс�
 
 А вообще тестирование может быть разным:
 
-- [Виды тестирования ПО 1(mind map)](https://qaevolution.ru/testirovanie-po/vidy-testirovaniya-po/)
-- [Виды тестирования ПО 2](http://www.protesting.ru/testing/testtypes.html)
-- [Классификация видов тестирования](https://qa-academy.by/qaacademy/news/klassifikaciya-vidov-testirovaniya/)
+- [Виды тестирования ПО 1(mind map)](https://web.archive.org/web/20250619024107/https://qaevolution.ru/testirovanie-po/vidy-testirovaniya-po/)
+- [Виды тестирования ПО 2](https://web.archive.org/web/20240912225106/http://www.protesting.ru/testing/testtypes.html)
+- [Классификация видов тестирования](https://web.archive.org/web/20221128024825/https://qa-academy.by/qaacademy/news/klassifikaciya-vidov-testirovaniya/)
 
 <!-- v -->
 
@@ -119,7 +119,7 @@ description: Тестирование кода как часть процесс�
 
 И они не покрывают интеграцию частей
 
-<img src="https://i.imgur.com/HkWPc1u.gif" title="Unit tests" />
+<img src="https://web.archive.org/web/20230427204504if_/https://i.imgur.com/HkWPc1u.gif" title="Unit tests" />
 
 <!-- v -->
 
@@ -364,7 +364,7 @@ it("calls cb with result", () => {
 
 <!-- v -->
 
-[Чем лучше вы знаете свой тестовый фреймворк - тем проще и быстрее вам писать тесты](https://webdevblog.ru/jest-tutorial-dlya-nachinajushhih-nachalo-raboty-s-jest-dlya-testirovaniya-javascript/).
+[Чем лучше вы знаете свой тестовый фреймворк - тем проще и быстрее вам писать тесты](https://web.archive.org/web/20241211121639/https://webdevblog.ru/jest-tutorial-dlya-nachinajushhih-nachalo-raboty-s-jest-dlya-testirovaniya-javascript/).
 
 <!-- v -->
 
@@ -428,7 +428,7 @@ _Для данной строки нужно проверить, что она �
 
 <!-- v -->
 
-1. Пишите чистые функции (которые зависят только от входных переменных, всегда выдают предсказуемый результат и не меняют ничего в окружении) ([а такое вообще возможно?](https://medium.com/devschacht/robin-pokorny-do-pure-functions-exist-in-javascript-94fd25180fdc))
+1. Пишите чистые функции (которые зависят только от входных переменных, всегда выдают предсказуемый результат и не меняют ничего в окружении) ([а такое вообще возможно?](https://web.archive.org/web/20221206091531/https://medium.com/devschacht/robin-pokorny-do-pure-functions-exist-in-javascript-94fd25180fdc))
 1. Пишите функции, которые принимают зависимости через параметры (не полагайтесь на замыкания и глобальные объекты)
 1. Сначала пишите тесты, а потом код
 1. Помните, что тесты тоже код. И тут действуют те же правила - _KISS_, _DRY_ и тп.
@@ -454,7 +454,7 @@ TDD и цикл RGR
 
 **Задача** - сделать поведение системы предсказуемым (и управляемым), в тех частях, которые мы не хотим тестировать, или которые не являются предсказуемыми в реальной жизни.
 
-[Mocks, stubs, spies etc.](https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs)
+[Mocks, stubs, spies etc.](https://web.archive.org/web/20260922091028/https://martinfowler.com/articles/mocksArentStubs.html#TheDifferenceBetweenMocksAndStubs#TheDifferenceBetweenMocksAndStubs)
 
 <!-- v -->
 
